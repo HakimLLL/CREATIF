@@ -23,9 +23,10 @@ function slugify(string $text): string
     return $text;
 }
 
-// Tronquage du texte à 10 mots
+// Tronquage du texte à 100 caracteres
 
-function truncate(string $string, int $lg_max = 10): string
+
+function truncate(string $string, int $lg_max = 100): string
 {
     if (strlen($string) > $lg_max):
 
@@ -34,4 +35,10 @@ function truncate(string $string, int $lg_max = 10): string
         return substr($string, 0, $last_space) . "...";;
     endif;
     return $string;
+}
+
+
+function dateFormator(string $date, string $format = "d/m/Y"): string
+{
+    return date($format, strtotime($date));
 }
