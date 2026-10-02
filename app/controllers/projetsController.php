@@ -13,8 +13,35 @@ function indexAction(PDO $connexion)
     $title = "Creatif";
 
 
-    global $content;
+    global $content, $showHeader;
+    $showHeader = true;
+
     ob_start();
     include '../app/views/projets/index.php';
+    $content = ob_get_clean();
+};
+
+function showAction(PDO $connexion, int $id)
+{
+    include_once '../app/models/projetsModel.php';
+    $projet = \App\Models\projetsModel\findOneByID($connexion, $id);
+    $title = $projet['titre'];
+
+
+    global $content;
+    ob_start();
+    include '../app/views/projets/show.php';
+    $content = ob_get_clean();
+}
+
+
+function addformAction(PDO $connexion)
+{
+    include '../app/models/projetsModel.php';
+    $projet = \App\Models\projetsModel\addForm($connexion);
+
+    global $content;
+    ob_start();
+    include '../app/views/projets/addform.php';
     $content = ob_get_clean();
 }

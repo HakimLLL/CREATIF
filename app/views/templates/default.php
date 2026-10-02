@@ -10,9 +10,14 @@
 
     <?php include '../app/views/templates/partials/_nav.php'; ?>
 
-    <?php include '../app/views/templates/partials/_header.php'; ?>
+    <?php if ($showHeader) include '../app/views/templates/partials/_header.php'; ?>
 
-    <?php include '../app/views/templates/partials/_main.php'; ?>
+    <div class="container ct-content-wrap">
+        <div class="row">
+            <?php include '../app/views/templates/partials/_main.php'; ?> <!-- <div class="col-lg-8"> … </div> -->
+            <?php include '../app/views/templates/partials/_aside.php'; ?> <!-- <div class="col-lg-4"> … </div> -->
+        </div>
+    </div>
 
     <?php include '../app/views/templates/partials/_footer.php'; ?>
 

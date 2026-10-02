@@ -9,14 +9,47 @@ use \PDO;
 
 function findAll(PDO $connexion, int $limit = 10)
 {
-    $sql = "SELECT *,p.image as projet_image
+    // ATTENTION: projets et creatifs ont tous les deux une colonne "id" et "image".
+    // Avec SELECT * le c.id écrasait le p.id => les liens pointaient vers le mauvais projet.
+    // On prend donc toutes les colonnes du projet (p.*) + seulement ce qu'il faut du créatif.
+    $sql = "SELECT p.*, p.image AS projet_image,
+                   c.id AS creatif_id, c.pseudo, c.image AS creatif_image
         FROM projets p
-        JOIN creatifs c ON p.creatif = c.id 
-        ORDER BY dateCreation DESC
+        JOIN creatifs c ON p.creatif = c.id
+        ORDER BY p.dateCreation DESC
         LIMIT :limit;";
 
     $rs = $connexion->prepare($sql);
     $rs->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $rs->execute();
+    return $rs->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+function findOneByID(PDO $connexion, int $id): array
+{
+    // Même principe que findAll(): pas de SELECT * pour éviter le conflit sur "id"
+    $sql = "SELECT p.*, p.image AS projet_image,
+                   c.id AS creatif_id, c.pseudo, c.image AS creatif_image
+        FROM projets p
+        JOIN creatifs c ON p.creatif = c.id
+        WHERE p.id = :id";
+
+    $rs = $connexion->prepare($sql);
+    $rs->bindValue(':id', $id, PDO::PARAM_INT);
+    $rs->execute();
+    return $rs->fetch(PDO::FETCH_ASSOC);
+}
+
+
+function addForm(PDO $connexion)
+{
+
+    $sql = "select *
+        from projets p;";
+
+
+    $rs = $connexion->prepare($sql);
     $rs->execute();
     return $rs->fetchAll(PDO::FETCH_ASSOC);
 }

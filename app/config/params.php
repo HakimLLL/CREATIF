@@ -5,6 +5,7 @@
 
 $title = "";
 $content = "";
+$showHeader = false; // bandeau d'intro masqué par défaut
 
 
 define("DB_HOST", "localhost:3306");

@@ -1,0 +1,37 @@
+<?php
+
+/** @var array $projet */ ?>
+
+<!-- Détail d'un projet : uniquement le contenu de la colonne principale -->
+<h1><?php echo $projet['titre']; ?></h1>
+<p class="ct-byline">par <a href="#"><?php echo $projet['pseudo']; ?></a> · <?php echo \Core\Helpers\dateFormator($projet['dateCreation'], 'd'); ?>
+    <?php echo \Core\Helpers\dateFormator($projet['dateCreation'], 'M'); ?>
+    <?php echo \Core\Helpers\dateFormator($projet['dateCreation'], 'Y'); ?></p>
+
+<div class="mb-4">
+    <!-- routes: /projets/id/slug/edit/form.html — /projets/delete/id/slug.html -->
+    <a href="form.html" class="ct-btn ct-btn--primary">Éditer le projet</a>
+    <a href="#" class="ct-btn ct-btn--danger" onclick="return confirm('Supprimer définitivement ce projet ?');">Supprimer le projet</a>
+</div>
+
+<article class="ct-card">
+    <div class="row">
+        <div class="col-md-6">
+            <img class="img-fluid mb-3 mb-md-0" src=images/<?php echo $projet['projet_image']; ?> alt="<?php echo $projet['titre']; ?>" />
+        </div>
+        <div class="col-md-6">
+            <p class="lead" style="font-weight: 600">
+                <?php echo $projet['dicton']; ?>
+            </p>
+            <hr />
+            <p>
+                <?php echo $projet['texte']; ?>
+            </p>
+            <hr />
+            <ul class="ct-tags">
+                <li><a class="ct-tag" href="#">Vintage</a></li>
+                <li><a class="ct-tag" href="#">Abstract</a></li>
+            </ul>
+        </div>
+    </div>
+</article>
