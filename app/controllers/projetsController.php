@@ -37,6 +37,15 @@ function showAction(PDO $connexion, int $id)
 
 function addformAction(PDO $connexion)
 {
+    // je vais cherches les creatifs
+    include '../app/models/creatifsModel.php';
+    $creatifs = \App\Models\creatifsModel\findAll($connexion);
+
+    include '../app/models/tagsModel.php';
+    $tags = \App\Models\tagsModel\findAll($connexion);
+
+
+
     include '../app/models/projetsModel.php';
     $projet = \App\Models\projetsModel\addForm($connexion);
 
