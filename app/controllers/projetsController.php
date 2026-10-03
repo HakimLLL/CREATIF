@@ -46,10 +46,6 @@ function addformAction(PDO $connexion)
     include '../app/models/tagsModel.php';
     $tags = \App\Models\tagsModel\findAll($connexion);
 
-
-    include '../app/models/projetsModel.php';
-    $projet = \App\Models\projetsModel\addForm($connexion);
-
     global $content;
     ob_start();
     include '../app/views/projets/addform.php';
@@ -77,7 +73,38 @@ function addInsertAction(PDO $connexion)
     exit;
 }
 
- //function deleteAction(PDO $connexion,int $id){
+function deleteAction(PDO $connexion, int $id)
+{
     // je demande au model de supprimer les liaison n-m correspondante
-    // je demande au moedel de supprimer le projet
- //}
+    include_once '../app/models/projetsModel.php';
+    $return1 = \App\Models\projetsModel\deleteProjetsHasTagsByProjetId($connexion, $id);
+
+    // je demande au model de supprimer le projet 
+
+    $return = \App\Models\projetsModel\deleteOneById($connexion, $id);
+
+    // je redirige vers l'acceuil
+    header('location:' . PUBLIC_BASE_URL);
+    exit;
+}
+
+function editFormAction(PDO $connexion, int $id)
+{
+    //je demande au model le projet à afficher dans le formulaire 
+    include_once '../app/models/projetsModel.php';
+    $projet = \App\Models\projetsModel\findOneByID($connexion, $id);
+
+    // je vais cherches les creatifs
+    include '../app/models/creatifsModel.php';
+    $creatifs = \App\Models\creatifsModel\findAll($connexion);
+
+    include '../app/models/tagsModel.php';
+    $tags = \App\Models\tagsModel\findAll($connexion);
+
+    // je charge la vue edit form dans $content1
+
+    global $content1;
+    ob_start();
+    include '../app/views/projets/editForm.php';
+    $content = ob_get_clean();
+}

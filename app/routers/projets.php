@@ -21,10 +21,14 @@ switch ($_GET['projets']):
             'creatif' => $_POST['creatif']
         ]*/
         break;
-    /*case 'delete':
+    case 'delete':
 
-        ProjetsController\deleteAction($connexion,$_GET['id']);
-*/
+        ProjetsController\deleteAction($connexion, $_GET['id']);
+        break;
+    case 'editForm':
+        ProjetsController\editFormAction($connexion, $_GET['id']);
+        break;
+
     default:
         ProjetsController\indexAction($connexion);
         break;

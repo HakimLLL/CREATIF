@@ -42,19 +42,6 @@ function findOneByID(PDO $connexion, int $id): array
 }
 
 
-function addForm(PDO $connexion)
-{
-
-    $sql = "select *
-        from projets p;";
-
-
-    $rs = $connexion->prepare($sql);
-    $rs->execute();
-    return $rs->fetchAll(PDO::FETCH_ASSOC);
-}
-
-
 function insertOne(PDO $connexion, array $data): int
 {
     $sql = "INSERT INTO projets
@@ -79,5 +66,25 @@ function insertTagById(PDO $connexion, array $data)
     $rs = $connexion->prepare($sql);
     $rs->bindValue(':projet', $data['projetID'], \PDO::PARAM_INT);
     $rs->bindValue(':tag', $data['tagID'], \PDO::PARAM_INT);
+    return  $rs->execute();
+}
+
+function deleteProjetsHasTagsByProjetId(PDO $connexion, int $projetID): bool
+{
+    $sql = "DELETE from projets_has_tags
+            where projet = :projet";
+
+    $rs = $connexion->prepare($sql);
+    $rs->bindValue(':projet', $projetID, \PDO::PARAM_INT);
+    return  $rs->execute();
+}
+
+function deleteOneById(PDO $connexion, int $id): bool
+{
+    $sql = "DELETE from projets
+            where id = :id";
+
+    $rs = $connexion->prepare($sql);
+    $rs->bindValue(':id', $id, \PDO::PARAM_INT);
     return  $rs->execute();
 }

@@ -1,6 +1,7 @@
 <?php
 
-/** @var array $projet */ ?>
+/** @var array $projet $*/
+/** @var array $tags $*/ ?>
 
 <!-- Détail d'un projet : uniquement le contenu de la colonne principale -->
 <h1><?php echo $projet['titre']; ?></h1>
@@ -11,7 +12,7 @@
 <div class="mb-4">
     <!-- routes: /projets/id/slug/edit/form.html — /projets/delete/id/slug.html -->
     <a href="form.html" class="ct-btn ct-btn--primary">Éditer le projet</a>
-    <a href="#" class="ct-btn ct-btn--danger" onclick="return confirm('Supprimer définitivement ce projet ?');">Supprimer le projet</a>
+    <a href="projets/delete/<?php echo $projet['id']; ?>/<?php echo \Core\Helpers\slugify($projet['titre']); ?>.html" class="ct-btn ct-btn--danger" onclick="return confirm('Supprimer définitivement ce projet ?');">Supprimer le projet</a>
 </div>
 
 <article class="ct-card">
