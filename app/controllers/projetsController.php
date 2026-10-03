@@ -94,16 +94,20 @@ function editFormAction(PDO $connexion, int $id)
     include_once '../app/models/projetsModel.php';
     $projet = \App\Models\projetsModel\findOneByID($connexion, $id);
 
-    // je vais cherches les creatifs
+    // je vais chercher les creatifs
     include '../app/models/creatifsModel.php';
     $creatifs = \App\Models\creatifsModel\findAll($connexion);
 
+    //je demande au model les tags par projetID
     include '../app/models/tagsModel.php';
-    $tags = \App\Models\tagsModel\findAll($connexion);
+    $tags = \App\Models\tagsModel\findAll($connexion,);
 
-    // je charge la vue edit form dans $content1
+    // je récupère les id des tags déjà liés au projet (pour savoir lesquels cocher)
+    $tagsDuProjet = array_column(\App\Models\tagsModel\findAllByProjet($connexion, $id), 'id');
 
-    global $content1;
+    // je charge la vue edit form dans $content
+
+    global $content;
     ob_start();
     include '../app/views/projets/editForm.php';
     $content = ob_get_clean();

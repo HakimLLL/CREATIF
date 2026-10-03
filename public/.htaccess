@@ -23,12 +23,15 @@ RewriteRule ^ - [L]
 
 RewriteRule ^projets\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*\.html$ ?projets=show&id=$1 [L]
 
+# --------------------------------------------
+
 # formulaire d'ajout d'un projet
 # PATTERN: /projets/add/form.html
 #URL : ?projets/add/form
 
 RewriteRule ^projets/add/form\.html$ ?projets=addForm [L]
 
+# --------------------------------------------
 
 # Ajout d'un projet
 # PATTERN: /projets/add/insert.html
@@ -36,11 +39,15 @@ RewriteRule ^projets/add/form\.html$ ?projets=addForm [L]
 
 RewriteRule ^projets/add/insert\.html$ ?projets=addInsert [L]
 
+# --------------------------------------------
 # ROUTE SUPPRESSION D'UN PROJET
 # PATTERN: /projets/delete/id/slug.html
 # URL: ?projets=delete&id=x
 
 RewriteRule ^projets/delete\/([1-9][0-9]*)\/([a-z0-9\-]*[a-z0-9])*\.html$ ?projets=delete&id=$1 [L]
+
+# --------------------------------------------
+
 
 # formulaire de modification d'un projet
 # PATTERN: /projets/id/slug/edit/form.html
