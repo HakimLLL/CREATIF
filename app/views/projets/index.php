@@ -35,24 +35,27 @@
 
 
 
-
 <!-- Pagination : 10 projets par page -->
+<!-- $page = page actuelle, $nbPages = nombre total de pages (calculés dans le contrôleur) -->
 <nav aria-label="Navigation entre les pages de projets">
     <ul class="pagination ct-pagination" style="justify-content: center">
-        <li class="page-item">
-            <a class="page-link" href="#">Précédent</a>
+
+        <!-- Précédent : désactivé sur la première page -->
+        <li class="page-item <?php if ($page <= 1) echo 'disabled'; ?>">
+            <a class="page-link" href="page/<?php echo $page - 1; ?>.html">Précédent</a>
         </li>
-        <li class="page-item active">
-            <a class="page-link" href="#">1</a>
+
+        <!-- Un lien par page ; la page actuelle est mise en évidence avec "active" -->
+        <?php for ($i = 1; $i <= $nbPages; $i++): ?>
+            <li class="page-item <?php if ($i == $page) echo 'active'; ?>">
+                <a class="page-link" href="page/<?php echo $i; ?>.html"><?php echo $i; ?></a>
+            </li>
+        <?php endfor; ?>
+
+        <!-- Suivant : désactivé sur la dernière page -->
+        <li class="page-item <?php if ($page >= $nbPages) echo 'disabled'; ?>">
+            <a class="page-link" href="page/<?php echo $page + 1; ?>.html">Suivant</a>
         </li>
-        <li class="page-item">
-            <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="#">Suivant</a>
-        </li>
+
     </ul>
 </nav>

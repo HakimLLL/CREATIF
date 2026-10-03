@@ -17,6 +17,8 @@ function findAll(PDO $connexion): array
     return $rs->fetchAll(PDO::FETCH_ASSOC);
 }
 
+
+// je prend tout les tags par projets
 function findAllByProjet(PDO $connexion, int $projetId): array
 {
     $sql = "SELECT *

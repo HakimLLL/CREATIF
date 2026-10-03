@@ -17,6 +17,13 @@ RewriteRule ^ - [L]
 # --------------------------------------------
 # RÈGLES DE RÉ-ÉCRITURE
 
+# --------------------------------------------
+# PAGINATION DE L'ACCUEIL
+# PATTERN: /page/x.html
+# URL: ?page=x
+
+RewriteRule ^page/([1-9][0-9]*)\.html$ ?page=$1 [L]
+
 # ROUTE PROJET.SHOW
 # PATTERN: /projets/id/slug.html
 # URL: ?projets=show&id=x
@@ -54,3 +61,9 @@ RewriteRule ^projets/delete\/([1-9][0-9]*)\/([a-z0-9\-]*[a-z0-9])*\.html$ ?proje
 # URL: ?projets=editForm&id=x
 
 RewriteRule ^projets\/([1-9][0-9]*)\/([a-z0-9\-]*[a-z0-9])*\/edit/form\.html$ ?projets=editForm&id=$1 [L]
+
+# formulaire de modification d'un projet
+# PATTERN: /projets/id/slug/edit/update.html
+# URL: ?projets=editUpdate&id=x
+
+RewriteRule ^projets\/([1-9][0-9]*)\/([a-z0-9\-]*[a-z0-9])*\/edit/update\.html$ ?projets=editUpdate&id=$1 [L]

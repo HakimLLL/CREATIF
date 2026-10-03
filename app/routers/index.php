@@ -10,7 +10,7 @@
 if (isset($_GET['projets'])):
     include_once '../app/routers/projets.php';
 
-// ROUTE PAR DÉFAUT: Les 10 derniers ptojets
+// ROUTE PAR DÉFAUT: Les 10 derniers projets
 // PATTERN: /
 // URL: ?
 // CTRL: projetsController
