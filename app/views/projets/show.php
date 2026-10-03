@@ -28,10 +28,13 @@
                 <?php echo $projet['texte']; ?>
             </p>
             <hr />
+            <!-- Tags du projet -->
             <ul class="ct-tags">
-                <li><a class="ct-tag" href="#">Vintage</a></li>
-                <li><a class="ct-tag" href="#">Abstract</a></li>
+                <?php foreach ($tags as $tag): ?>
+                    <li><a class="ct-tag" href="#"><?php echo $tag['nom']; ?></a></li>
+                <?php endforeach; ?>
             </ul>
+
         </div>
     </div>
 </article>

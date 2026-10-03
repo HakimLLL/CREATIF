@@ -5,11 +5,11 @@
           -->
 <h1 class="mb-4">Ajouter un projet</h1>
 
-<form action="" method="post" enctype="multipart/form-data" class="ct-form-card">
+<form action="projets/add/insert.html" method="post" enctype="multipart/form-data" class="ct-form-card">
     <label for="title">Titre du projet</label>
     <input
         type="text"
-        name="title"
+        name="titre"
         id="title"
         class="form-control"
         placeholder="Ex : Frange Kamikaze" />
@@ -17,7 +17,7 @@
     <label for="text">Description</label>
     <textarea
         id="text"
-        name="text"
+        name="texte"
         class="form-control"
         rows="5"
         placeholder="Racontez l'histoire (courageuse) de ce projet..."></textarea>
@@ -33,7 +33,7 @@
     </div>
 
     <label for="category">Créa'tif</label>
-    <select id="category" name="category_id" class="form-control">
+    <select id="category" name="creatif" class="form-control">
         <?php foreach ($creatifs as $creatif): ?>
             <option value="<?php echo $creatif['id'] ?>"><?php echo $creatif['pseudo'] ?></option>
         <?php endforeach; ?>
@@ -42,7 +42,7 @@
     <label>Tags <span style="font-weight:400;font-size:.8rem;color:#4a3a5a">(facultatif)</span></label>
     <div class="ct-tag-choice">
         <?php foreach ($tags as $tag): ?>
-            <label><input type="checkbox" name="tags[]" value="<?php $tag['id'] ?>"><?php echo $tag['nom'] ?></label>
+            <label><input type="checkbox" name="tags[]" value="<?php echo $tag['id'] ?>"><?php echo $tag['nom'] ?></label>
         <?php endforeach; ?>
     </div>
 

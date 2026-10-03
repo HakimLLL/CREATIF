@@ -27,6 +27,8 @@ function showAction(PDO $connexion, int $id)
     $projet = \App\Models\projetsModel\findOneByID($connexion, $id);
     $title = $projet['titre'];
 
+    include_once '../app/models/tagsModel.php';
+    $tags = \App\Models\tagsModel\findAllByProjet($connexion, $id);
 
     global $content;
     ob_start();
@@ -45,7 +47,6 @@ function addformAction(PDO $connexion)
     $tags = \App\Models\tagsModel\findAll($connexion);
 
 
-
     include '../app/models/projetsModel.php';
     $projet = \App\Models\projetsModel\addForm($connexion);
 
@@ -54,3 +55,29 @@ function addformAction(PDO $connexion)
     include '../app/views/projets/addform.php';
     $content = ob_get_clean();
 }
+
+function addInsertAction(PDO $connexion)
+
+{
+    // je demande au model d'ajouter le projet
+    include_once '../app/models/projetsModel.php';
+    $id = \App\Models\projetsModel\insertOne($connexion, $_POST);
+
+    // je demande au model d'ajouter les tags correspondants
+    foreach ($_POST['tags'] as $tagID) {
+        $return = \App\Models\projetsModel\insertTagById($connexion, [
+            'projetID' => $id,
+            'tagID' => $tagID
+        ]);
+    }
+
+
+    // je redirige vers la page d'acceuil
+    header('location:' . PUBLIC_BASE_URL);
+    exit;
+}
+
+ //function deleteAction(PDO $connexion,int $id){
+    // je demande au model de supprimer les liaison n-m correspondante
+    // je demande au moedel de supprimer le projet
+ //}

@@ -17,17 +17,21 @@ RewriteRule ^ - [L]
 # --------------------------------------------
 # RÈGLES DE RÉ-ÉCRITURE
 
-
 # ROUTE PROJET.SHOW
-# PATTERN: /projets/id/slug
+# PATTERN: /projets/id/slug.html
 # URL: ?projets=show&id=x
 
-RewriteRule ^projets\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*$ ?projets=show&id=$1 [L]
+RewriteRule ^projets\/([1-9][0-9]*)\/[a-z0-9]([a-z0-9\-]*[a-z0-9])*\.html$ ?projets=show&id=$1 [L]
 
-# Ajout d'un projet
+# formulaire d'ajout d'un projet
 # PATTERN: /projets/add/form.html
 #URL : ?projets/add/form
 
 RewriteRule ^projets/add/form\.html$ ?projets=addForm [L]
 
 
+# Ajout d'un projet
+# PATTERN: /projets/add/insert.html
+#URL : ?projets/add/insert
+
+RewriteRule ^projets/add/insert\.html$ ?projets=addInsert [L]

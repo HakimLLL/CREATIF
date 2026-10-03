@@ -53,3 +53,31 @@ function addForm(PDO $connexion)
     $rs->execute();
     return $rs->fetchAll(PDO::FETCH_ASSOC);
 }
+
+
+function insertOne(PDO $connexion, array $data): int
+{
+    $sql = "INSERT INTO projets
+            SET titre  = :titre,
+                texte  = :texte,
+                creatif = :creatif,
+                DateCreation = NOW();";
+    $rs = $connexion->prepare($sql);
+    $rs->bindValue(':titre', $data['titre'], \PDO::PARAM_STR);
+    $rs->bindValue(':texte', $data['texte'], \PDO::PARAM_STR);
+    $rs->bindValue(':creatif', $data['creatif'], \PDO::PARAM_INT);
+    $rs->execute();
+    return $connexion->lastInsertId();
+}
+
+function insertTagById(PDO $connexion, array $data)
+{
+    $sql = "INSERT into projets_has_tags
+            SET projet = :projet,
+                tag = :tag;";
+
+    $rs = $connexion->prepare($sql);
+    $rs->bindValue(':projet', $data['projetID'], \PDO::PARAM_INT);
+    $rs->bindValue(':tag', $data['tagID'], \PDO::PARAM_INT);
+    return  $rs->execute();
+}
